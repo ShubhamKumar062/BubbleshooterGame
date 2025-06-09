@@ -43,6 +43,16 @@
   margin-left: var(--space-2);
 }
 
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  gap: 1rem;
+}
+
+.filter-buttons .btn {
+  min-width: 100px;
+}
 .loading-spinner {
   text-align: center;
   padding: var(--space-8);

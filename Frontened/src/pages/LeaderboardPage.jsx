@@ -9,20 +9,22 @@ function LeaderboardPage() {
   const [userRank, setUserRank] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  
+  const [filter, setFilter] = useState('all') // 'all' | 'weekly'
+
   const { user, isAuthenticated } = useAuth()
-  
+
   useEffect(() => {
     fetchLeaderboard()
-  }, [])
-  
+  }, [filter])
+
   const fetchLeaderboard = async () => {
     try {
       setLoading(true)
-      const response = await axios.get('/api/leaderboard')
+      const endpoint =
+        filter === 'weekly' ? '/api/leaderboard/weekly' : '/api/leaderboard'
+      const response = await axios.get(endpoint)
       setLeaderboard(response.data)
-      
-      // Find user's rank if authenticated
+
       if (isAuthenticated && user) {
         const userScore = response.data.find(entry => entry.userId === user._id)
         if (userScore) {
@@ -30,6 +32,8 @@ function LeaderboardPage() {
             rank: response.data.findIndex(entry => entry.userId === user._id) + 1,
             score: userScore.score
           })
+        } else {
+          setUserRank(null)
         }
       }
     } catch (err) {
@@ -39,24 +43,40 @@ function LeaderboardPage() {
       setLoading(false)
     }
   }
-  
+
   const formatDate = (dateString) => {
     const date = new Date(dateString)
     return date.toLocaleDateString()
   }
-  
+
   return (
     <div className="leaderboard-page">
       <div className="leaderboard-container">
         <h1>Leaderboard</h1>
-        
+
+        {/* Filter Buttons */}
+        <div className="filter-buttons">
+          <button
+            className={`btn ${filter === 'all' ? 'btn-primary' : 'btn-outline'}`}
+            onClick={() => setFilter('all')}
+          >
+            All Time
+          </button>
+          <button
+            className={`btn ${filter === 'weekly' ? 'btn-primary' : 'btn-outline'}`}
+            onClick={() => setFilter('weekly')}
+          >
+            Weekly
+          </button>
+        </div>
+
         {userRank && (
           <div className="user-rank">
             <p>Your Rank: <span>#{userRank.rank}</span></p>
             <p>Best Score: <span>{userRank.score}</span></p>
           </div>
         )}
-        
+
         {loading ? (
           <div className="loading-spinner">Loading...</div>
         ) : error ? (
@@ -66,9 +86,7 @@ function LeaderboardPage() {
             {leaderboard.length === 0 ? (
               <div className="empty-leaderboard">
                 <p>No scores yet! Be the first to play.</p>
-                <Link to="/" className="btn btn-primary">
-                  Play Now
-                </Link>
+                <Link to="/" className="btn btn-primary">Play Now</Link>
               </div>
             ) : (
               <div className="leaderboard-table-container">
@@ -83,7 +101,7 @@ function LeaderboardPage() {
                   </thead>
                   <tbody>
                     {leaderboard.map((entry, index) => (
-                      <tr 
+                      <tr
                         key={entry._id}
                         className={user && entry.userId === user._id ? 'current-user' : ''}
                       >
@@ -101,25 +119,19 @@ function LeaderboardPage() {
                 </table>
               </div>
             )}
-            
+
             <div className="leaderboard-footer">
               {!isAuthenticated && (
                 <div className="auth-prompt">
                   <p>Login to save your scores and compete!</p>
                   <div className="auth-buttons">
-                    <Link to="/login" className="btn btn-primary">
-                      Login
-                    </Link>
-                    <Link to="/register" className="btn btn-outline">
-                      Sign Up
-                    </Link>
+                    <Link to="/login" className="btn btn-primary">Login</Link>
+                    <Link to="/register" className="btn btn-outline">Sign Up</Link>
                   </div>
                 </div>
               )}
-              
-              <Link to="/" className="btn btn-secondary play-button">
-                Play Game
-              </Link>
+
+              <Link to="/" className="btn btn-secondary play-button">Play Game</Link>
             </div>
           </>
         )}
