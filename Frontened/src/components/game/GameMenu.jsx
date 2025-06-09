@@ -7,7 +7,7 @@ function GameMenu({ onStartGame }) {
   
   return (
     <div className="game-menu">
-      <h1 className="game-title">Bubble<span>Shooter</span></h1>
+      <h1 className="game-title">🫧Bubble<span>Shooter🎯</span></h1>
       <p className="game-description">Match 3 or more bubbles of the same color to pop them!</p>
       
       <div className="menu-buttons">

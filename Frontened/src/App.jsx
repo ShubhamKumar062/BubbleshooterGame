@@ -9,6 +9,7 @@ import LeaderboardPage from './pages/LeaderboardPage'
 import Layout from './components/Layout'
 import NotFoundPage from './pages/NotFoundPage'
 import SoundManager from './utils/SoundManager'
+import LayoutNoHeader from './components/LayoutNoHeader'
 
 function App() {
   const { isAuthenticated } = useAuth()
@@ -25,17 +26,19 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<GamePage />} />
-        <Route path="login" element={
+      <Route element={<Layout/>}>
+        <Route path="/" element={<GamePage />} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
+      </Route>
+      <Route element={< LayoutNoHeader/>}>
+        <Route path="/login" element={
           isAuthenticated ? <Navigate to="/" /> : <LoginPage />
         } />
-        <Route path="register" element={
+        <Route path="/register" element={
           isAuthenticated ? <Navigate to="/" /> : <RegisterPage />
         } />
-        <Route path="leaderboard" element={<LeaderboardPage />} />
-        <Route path="*" element={<NotFoundPage />} />
       </Route>
+        <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }

@@ -45,7 +45,7 @@ function Header() {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container header-container">
         <Link to="/" className="logo">
-          <span className="logo-text">Bubble<span>Shooter</span></span>
+          <span className="logo-text">🫧Bubble<span>Shooter🎯</span></span>
         </Link>
         
         <div className="header-actions">
@@ -55,9 +55,9 @@ function Header() {
             aria-label={isMuted ? "Unmute sounds" : "Mute sounds"}
           >
             {isMuted ? (
-              <span className="material-icons">volume_off</span>
+              <span className="material-icons">🔇</span>
             ) : (
-              <span className="material-icons">volume_up</span>
+              <span className="material-icons">🔊</span>
             )}
           </button>
           

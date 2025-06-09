@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import SoundManager from '../utils/SoundManager'
 import './AuthPages.css'
+import bgImage from '../assets/2951605.jpg'
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -68,7 +69,15 @@ function RegisterPage() {
   }
   
   return (
-    <div className="auth-page">
+    <div className="auth-page"
+     style={{
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    height: '100vh',
+  }}
+    >
       <div className="auth-container">
         <h1>Create Account</h1>
         
