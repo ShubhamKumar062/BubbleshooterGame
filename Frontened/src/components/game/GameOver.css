@@ -1,0 +1,67 @@
+.game-over {
+  background-color: white;
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  max-width: 300px;
+  animation: scaleIn 0.3s ease forwards;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.game-over h2 {
+  margin-bottom: var(--space-6);
+  color: var(--color-error);
+}
+
+.final-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-1);
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.game-over-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.game-over-buttons button {
+  width: 100%;
+}
+
+.leaderboard-link {
+  display: inline-block;
+  margin-top: var(--space-4);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.auth-prompt {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background-color: var(--color-gray-100);
+  border-radius: var(--radius-md);
+}
+
+.auth-prompt p {
+  margin-bottom: var(--space-4);
+  color: var(--color-gray-700);
+}
+
+.auth-prompt .btn {
+  width: 100%;
+}

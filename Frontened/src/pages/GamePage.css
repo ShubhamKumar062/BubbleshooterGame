@@ -1,0 +1,58 @@
+.game-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-4);
+}
+
+.game-container {
+  width: 100%;
+  max-width: 800px;
+  min-height: 600px;
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: var(--space-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.pause-menu {
+  background-color: white;
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  max-width: 300px;
+  animation: scaleIn 0.3s ease forwards;
+}
+
+.pause-menu h2 {
+  margin-bottom: var(--space-6);
+  color: var(--color-gray-900);
+}
+
+.pause-menu button {
+  margin: var(--space-2);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    padding: var(--space-2);
+    min-height: 400px;
+  }
+}
