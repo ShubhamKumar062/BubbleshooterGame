@@ -1,4 +1,3 @@
-// routes/auth.js
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
@@ -34,7 +33,6 @@ router.post('/register', async (req, res) => {
     // No token here
     res.status(201).json({
       message: 'User registered successfully',
-      token,
       user: {
         _id: user._id,
         username: user.username,
@@ -49,7 +47,7 @@ router.post('/register', async (req, res) => {
 })
 
 // Login
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body
 
