@@ -57,8 +57,18 @@ class SoundManager {
   }
   
   static toggleMute() {
-    Howler.mute(!Howler.mute())
+  const isMuted = Howler._muted;
+  Howler.mute(!isMuted)
+
+  if (!isMuted) {
+    
+    this.stopBackgroundMusic()
+  } else {
+    
+    this.playBackgroundMusic()
   }
+}
+
   
   static stopAll() {
     Object.values(soundInstances).forEach(sound => {

@@ -50,47 +50,46 @@ class BubbleShooter {
   }
   
   setupEventListeners() {
-    // Mouse move for aiming
-    this.canvas.addEventListener('mousemove', (e) => {
-      if (this.isPaused) return
-      
-      const rect = this.canvas.getBoundingClientRect()
-      const mouseX = e.clientX - rect.left
-      const mouseY = e.clientY - rect.top
-      
-      if (this.shooter) {
-        this.shooter.aim(mouseX, mouseY)
-      }
-    })
-    
-    // Click to shoot
-    this.canvas.addEventListener('click', () => {
-      if (this.isPaused || this.isAnimating || !this.activeBubble) return
-      
-      this.shootBubble()
-    })
-    
-    // Touch events for mobile
-    this.canvas.addEventListener('touchmove', (e) => {
-      if (this.isPaused) return
-      
-      e.preventDefault()
-      const rect = this.canvas.getBoundingClientRect()
-      const touchX = e.touches[0].clientX - rect.left
-      const touchY = e.touches[0].clientY - rect.top
-      
-      if (this.shooter) {
-        this.shooter.aim(touchX, touchY)
-      }
-    })
-    
-    this.canvas.addEventListener('touchend', (e) => {
-      if (this.isPaused || this.isAnimating || !this.activeBubble) return
-      
-      e.preventDefault()
-      this.shootBubble()
-    })
-  }
+  // Bind methods once in constructor
+  this.handleMouseMove = this.handleMouseMove.bind(this);
+  this.handleClick = this.handleClick.bind(this);
+  this.handleTouchMove = this.handleTouchMove.bind(this);
+  this.handleTouchEnd = this.handleTouchEnd.bind(this);
+
+  this.canvas.addEventListener('mousemove', this.handleMouseMove);
+  this.canvas.addEventListener('click', this.handleClick);
+  this.canvas.addEventListener('touchmove', this.handleTouchMove);
+  this.canvas.addEventListener('touchend', this.handleTouchEnd);
+}
+
+handleMouseMove(event) {
+  if (this.isPaused) return;
+  const rect = this.canvas.getBoundingClientRect();
+  const mouseX = event.clientX - rect.left ;
+  const mouseY = event.clientY - rect.top;
+  if (this.shooter) this.shooter.aim(mouseX, mouseY);
+}
+
+handleClick(event) {
+  if (this.isPaused || this.isAnimating || !this.activeBubble) return;
+  this.shootBubble();
+}
+
+handleTouchMove(event) {
+  if (this.isPaused) return;
+  event.preventDefault();
+  const rect = this.canvas.getBoundingClientRect();
+  const touchX = event.touches[0].clientX - rect.left;
+  const touchY = event.touches[0].clientY - rect.top;
+  if (this.shooter) this.shooter.aim(touchX, touchY);
+}
+
+handleTouchEnd(event) {
+  if (this.isPaused || this.isAnimating || !this.activeBubble) return;
+  event.preventDefault();
+  this.shootBubble();
+}
+
   
   setupLevel(level) {
     // Clear existing grid
@@ -347,8 +346,7 @@ class BubbleShooter {
     if (!this.shooter || !this.activeBubble || this.activeBubble.isMoving) return
     
     // Update active bubble position to follow shooter
-    this.activeBubble.x = this.shooter.x
-    this.activeBubble.y = this.shooter.y - this.shooter.height / 2 - this.bubbleRadius
+    this.activeBubble.alignWithShooter(this.shooter);
   }
   
   render() {
@@ -445,13 +443,13 @@ class BubbleShooter {
     this.lastTime = performance.now()
   }
   
-  destroy() {
-    // Remove event listeners
-    this.canvas.removeEventListener('mousemove', this.handleMouseMove)
-    this.canvas.removeEventListener('click', this.handleClick)
-    this.canvas.removeEventListener('touchmove', this.handleTouchMove)
-    this.canvas.removeEventListener('touchend', this.handleTouchEnd)
-  }
+destroy() {
+  this.canvas.removeEventListener('mousemove', this.handleMouseMove);
+  this.canvas.removeEventListener('click', this.handleClick);
+  this.canvas.removeEventListener('touchmove', this.handleTouchMove);
+  this.canvas.removeEventListener('touchend', this.handleTouchEnd);
+}
+
 }
 
 export default BubbleShooter

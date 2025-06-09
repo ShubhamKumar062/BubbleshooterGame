@@ -1,6 +1,6 @@
 class Bubble {
   constructor(x, y, radius, color, gridPosition = null) {
-    this.x = x
+    this.x = x 
     this.y = y
     this.radius = radius
     this.color = color
@@ -81,6 +81,16 @@ class Bubble {
         this.scale = 0
       }, 100)
     }, 100)
+  }
+
+  // Add a method to align with shooter
+  alignWithShooter(shooter) {
+    // Match exactly how the shooter tip is drawn
+    const tipDistance = shooter.height / 2 + shooter.bubbleRadius;
+    
+    // Position at the tip of the shooter arrow
+    this.x = shooter.x + Math.cos(shooter.angle) * tipDistance;
+    this.y = shooter.y + Math.sin(shooter.angle) * tipDistance;
   }
 }
 

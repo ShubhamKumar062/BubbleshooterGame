@@ -12,7 +12,7 @@ class Particle {
   }
   
   update() {
-    this.x += this.speedX
+    this.x += this.speedX 
     this.y += this.speedY
     this.speedY += 0.1 // Gravity
     this.life--
@@ -26,7 +26,7 @@ class Particle {
     ctx.globalAlpha = this.opacity
     ctx.fillStyle = this.color
     ctx.beginPath()
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    ctx.arc(this.x , this.y, this.size, 0, Math.PI * 2)
     ctx.fill()
     ctx.globalAlpha = 1
   }
