@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import SoundManager from '../utils/SoundManager'
 import './AuthPages.css'
-
+import bgImage from '../assets/2951605.jpg'
 function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
@@ -32,7 +32,16 @@ function LoginPage() {
   }
   
   return (
-    <div className="auth-page">
+    <div className="auth-page"
+     
+    style={{
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    height: '100vh',
+  }}
+    >
       <div className="auth-container">
         <h1>Login</h1>
         

@@ -9,7 +9,7 @@ function Footer() {
       <div className="container footer-container">
         <div className="footer-content">
           <div className="footer-logo">
-            <span className="logo-text">Bubble<span>Shooter</span></span>
+            <span className="logo-text">🫧Bubble<span>Shooter🎯</span></span>
             <p className="footer-tagline">A fun bubble popping adventure!</p>
           </div>
           
