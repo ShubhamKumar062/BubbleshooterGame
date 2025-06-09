@@ -11,7 +11,10 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    // Check if user is logged in on initial load
+    axios.defaults.baseURL = 'http://localhost:5000' // or from env variable
+  }, [])
+
+   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
       checkUserAuth(token)
@@ -19,7 +22,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false)
     }
   }, [])
-
+  
   const checkUserAuth = async (token) => {
     try {
       const res = await axios.get('/api/auth/verify', {

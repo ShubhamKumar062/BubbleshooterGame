@@ -34,6 +34,7 @@ router.post('/register', async (req, res) => {
     // No token here
     res.status(201).json({
       message: 'User registered successfully',
+      token,
       user: {
         _id: user._id,
         username: user.username,
@@ -48,7 +49,7 @@ router.post('/register', async (req, res) => {
 })
 
 // Login
-router.post('/login', async (req, res) => {
+router.get('/login', async (req, res) => {
   try {
     const { email, password } = req.body
 
