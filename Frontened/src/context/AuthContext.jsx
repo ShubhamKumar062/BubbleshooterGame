@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    axios.defaults.baseURL = 'http://localhost:5000' // or from env variable
+    axios.defaults.baseURL = 'https://bubbleshootergame.onrender.com' // or from env variable
   }, [])
 
    useEffect(() => {
