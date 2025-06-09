@@ -9,13 +9,15 @@ function LeaderboardPage() {
   const [userRank, setUserRank] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [filter, setFilter] = useState('all') // 'all' | 'weekly'
+  const [filter, setFilter] = useState('all')
 
   const { user, isAuthenticated } = useAuth()
 
   useEffect(() => {
-    fetchLeaderboard()
-  }, [filter])
+    if (filter && isAuthenticated !== null) {
+      fetchLeaderboard()
+    }
+  }, [filter, isAuthenticated])
 
   const fetchLeaderboard = async () => {
     try {
@@ -23,22 +25,25 @@ function LeaderboardPage() {
       const endpoint =
         filter === 'weekly' ? '/api/leaderboard/weekly' : '/api/leaderboard'
       const response = await axios.get(endpoint)
-      setLeaderboard(response.data)
+      const data = Array.isArray(response.data) ? response.data : []
+      setLeaderboard(data)
 
-      if (isAuthenticated && user) {
-        const userScore = response.data.find(entry => entry.userId === user._id)
+      if (isAuthenticated && user && user._id) {
+        const userScore = data.find(entry => entry.userId === user._id)
         if (userScore) {
           setUserRank({
-            rank: response.data.findIndex(entry => entry.userId === user._id) + 1,
+            rank: data.findIndex(entry => entry.userId === user._id) + 1,
             score: userScore.score
           })
         } else {
           setUserRank(null)
         }
+      } else {
+        setUserRank(null)
       }
     } catch (err) {
+      console.error('Failed to fetch leaderboard:', err)
       setError('Failed to load leaderboard')
-      console.error(err)
     } finally {
       setLoading(false)
     }
