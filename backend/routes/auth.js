@@ -8,43 +8,49 @@ const router = express.Router()
 // Register
 router.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body
+    const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
-      return res.status(400).json({ message: 'All fields are required' })
+      return res.status(400).json({ message: 'All fields are required' });
     }
 
     const existingUser = await User.findOne({
       $or: [{ email: email.toLowerCase() }, { username }]
-    })
+    });
 
     if (existingUser) {
-      return res.status(400).json({ message: 'Email or username already in use' })
+      return res.status(400).json({ message: 'Email or username already in use' });
     }
 
     const user = new User({
       username,
       email: email.toLowerCase(),
       password
-    })
+    });
 
-    await user.save()
+    await user.save();
 
-    // No token here
+    // ✅ Generate token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret', {
+      expiresIn: '1d'
+    });
+
+    // ✅ Respond with token and user
     res.status(201).json({
       message: 'User registered successfully',
+      token,
       user: {
         _id: user._id,
         username: user.username,
         email: user.email,
         highScore: user.highScore
       }
-    })
+    });
   } catch (error) {
-    console.error('Register error:', error)
-    res.status(500).json({ message: 'Server error' })
+    console.error('Register error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
-})
+});
 
 // Login
 router.post('/login', async (req, res) => {
