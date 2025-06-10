@@ -40,13 +40,13 @@ git clone hhttps://github.com/ShubhamKumar062/BubbleshooterGame.git
 ----
 2. **Install dependencies**
 
-# For frontend
--- cd Frontend
--- npm install
+ For frontend
+- cd Frontend
+- npm install
 
 # For backend
--- cd backend
--- npm install
+- cd backend
+- npm install
 
 3. **Set up environment variables**
 
@@ -57,8 +57,8 @@ Create a .env file in the server directory and add:
 
 4. **Run the app**
 
-   # In frontend/
-     npm start
+-In frontend/
+  npm run dev
 
-   # In backend/
-     npm run dev
+ -In backend/
+  npm run dev
