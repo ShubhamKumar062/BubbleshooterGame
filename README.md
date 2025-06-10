@@ -26,7 +26,10 @@ Players can log in, enjoy a smooth and interactive bubble-shooting experience, a
 ---
 ## 📸 Screenshots
 
-> (Add screenshots or a gameplay GIF here if you’ve got them! Nothing like visual candy 🍭)
+> ![image](https://github.com/user-attachments/assets/cca87a35-ab4c-4dd9-912b-164c603524d1)
+
+> ![image](https://github.com/user-attachments/assets/42a16dfe-0c53-461f-80b7-acb248a61565)
+
 
 ---
 
