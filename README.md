@@ -44,7 +44,7 @@ git clone hhttps://github.com/ShubhamKumar062/BubbleshooterGame.git
 - cd Frontend
 - npm install
 
-# For backend
+ For backend
 - cd backend
 - npm install
 
