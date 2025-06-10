@@ -50,15 +50,16 @@ git clone hhttps://github.com/ShubhamKumar062/BubbleshooterGame.git
 
 3. **Set up environment variables**
 
-Create a .env file in the server directory and add:
-  PORT=5000
-  MONGO_URI=your_mongodb_connection_string
-  JWT_SECRET=your_secret_key
+  **Create a .env file in the server directory and add:**
+  
+  - PORT=5000
+  - MONGO_URI=your_mongodb_connection_string
+  - JWT_SECRET=your_secret_key
 
 4. **Run the app**
 
--In frontend/
-  npm run dev
+- In frontend/
+  - npm run dev
 
- -In backend/
-  npm run dev
+- In backend/
+  - npm run dev
